@@ -1,0 +1,171 @@
+* This is the Monads power.
+
+** Introduksjon
+Heisann, takk for at dere ville høre mer om Monader! Idag skal jeg snakke om Monader og hvordan de kan påvirke din utvikling selv om du utvikler i et imperativt språk. 
+
+
+** Presenter Meg selv
+Jeg heter Hussam og er en utvikler hos Knowit experience Bergen. Jeg er også veldig glad i Haskell og funksjonell programmering.
+Jeg ble spurt om jeg ville holde et webinar om Haskell men tenkte at det var bedre å spisse webinaret om et tema. 
+
+** Før vi går videre...
+douglas Crockford sa "In order to understand monads, you need to first learn Haskell and Category theory. 
+I think this is like saying: In order to understand burritos you need to speak Spanish." 
+
+Jeg er veldig enig med han. Monader er et design pattern som kan implementeres i alle språk med høyere ordens funksjoner. På en annen
+side så vil jeg oppmuntre alle som er interessert i Haskell. Lær haskell! 
+
+
+
+
+** Hvorfor skal du bry deg? 
+Funksjonelle konsepter kommer til imperative språk følgende konsepter ble introdusert i funksjonelle språk men kom til imperative et par tiår seinere:
+Lambdaer, høyere ordens funksjoner, generics, garbage collection og dynamisk typing. Jeg hjukset litt med det de to siste: 
+De kommer fra lisp som var langt foran sin tid. 
+
+Men du får også lettere feil håndtering. Mindre null checks overalt og mindre boilerplate kode. 
+
+** Historie
+Monader ble introdusert av den franske matematikeren Roger Godement. Monader holdt seg blant teoretikerne i flere tiår og begynte å bli mer populært blant informatikk forskere. 
+Ble brukt til blant annet å forske på lambda calculus. På et punkt ble det introdusert i Haskell språket der det ble veldig populært. 
+
+Nå er konseptet populært blant mange utviklere som jobber med imperative språk. I fossdem 2020 var det en talk om monader i python. Andre språk som der monader blir brukt
+er blant annet Python, Perl, Scheme, Scala, F# og Kotlin. 
+
+
+** Funksjonell intro: Kontekst
+
+Gitt tre funksjoner f g h og et argument x så skriver man følgende. 
+
+#+NAME: Intro til Haskell 
+#+BEGIN_SRC haskell 
+(f (g (h x))) = (f . g . h) x
+#+END_SRC
+
+dette er ekvivalent til følgende i imperative språk. 
+
+#+BEGIN_SRC python 
+f(g(h(x))) 
+#+END_SRC
+
+og det er slik man bygger opp programmer. Man tar små funksjoner og kombinerer de til å lage et større program. For et program som teller alle pandaer fra en eller annen struktor:
+
+#+NAME: Intro til Haskell 
+#+BEGIN_SRC haskell 
+countPandas pandas = (length . toList) pandas
+#+END_SRC
+
+
+
+** Kontekst!
+la oss gå over til Haskell kompilatoren. Vi bruker Haskell for den har full støtte for monader uten noe bibloteker eller uten at vi må implementere noe selv. 
+Vi skal stort sett gå over feilhåndtering monader fordi de er de mest aktuelle monadene å se på hvis vi skal jobbe med imperative språk. 
+
+Den enkleste datatypen vi har å jobbe med er heltall: Integers. Vi kan plusse de sammen 
+
+
+#+NAME: Intro til Haskell 
+#+BEGIN_SRC haskell 
+plus1 = (+1)
+plus1 0
+
+double = (*2) 
+quadrouple = double . double 
+
+half = (/2)
+quarter = half . half
+#+END_SRC
+
+Vi har mange operasjoner vi kan gjøre med tall, en operasjon som kan feile er nok å dele på null. 
+
+Det som er viktig her er å formidle at det med at deling med null er bare et eksempel på noe som kan feile. Å forsøke å lese en fil som ikkje eksisterer kan feile,
+å kalle en funksjon på en nullpointer kan feile, å gjøre en bad request kan feile osv. 
+
+Vi håndterer slikt med å kaste exceptions. Men exceptions kan gjøre det vanskelig å debugge og gi spaghetti kode. 
+
+Exeptions enkoder feilen i funksjonskallet, men istedet hva med å enkode feilen i typen? 
+
+
+** Feilhåndtering med Maybe monaden. 
+
+Maybe monaden er en super enkel monade som gir metodikk for utvikling av feilbare kalkulasjoner!
+
+Typesignaturen kan se en smule ut som None verdien i python eller null verdien i de fleste andre språk. Men bind og return gjør den annerledes. 
+
+#+NAME: Maybe monade implementasjonen
+#+BEGIN_SRC haskell 
+data Maybe a = Just a | Nothing
+
+instance Monad Maybe a where
+  return = Just
+  Nothing >>= _ = Nothing
+  Just a >>= f = f a
+#+END_SRC
+Tegning av en boks. SE TEGNING
+
+Maybe er en boks som omringer verdien din hvis det finnes en verdi og gir ut nothing hvis det ikke finnes noe verdi. 
+
+Det som er viktig med Maybe er at den tar ansvaret for feilhåndtering vekk fra funksjonen som kalkulerer og legger ansvaret over på bind. 
+
+
+
+#+NAME: nevner og teller. 
+#+BEGIN_SRC haskell 
+div teller nevner = if nevnert==0 then Nothing else teller/nevner
+
+verdi = div 1 2
+
+verdi >>= ( + 1) # Vil ikke virker!!!
+verdi >>= (return . (+1)) #  virker!!!
+#+END_SRC
+
+
+#+NAME: grandparents
+#+BEGIN_SRC haskell 
+bothGrandfathers :: Person -> Maybe (Person, Person)
+    bothGrandfathers p =
+        case father p of
+            Nothing -> Nothing
+            Just dad ->
+                case father dad of
+                    Nothing -> Nothing
+                    Just gf1 ->                          -- found first grandfather
+                        case mother p of
+                            Nothing -> Nothing
+                            Just mom ->
+                                case father mom of
+                                    Nothing -> Nothing
+                                    Just gf2 ->          -- found second grandfather
+                                        Just (gf1, gf2)
+#+END_SRC
+
+#+NAME: grandparents shorter
+#+BEGIN_SRC haskell 
+bothGrandfathers p =
+    father p >>=
+        (\dad -> father dad >>=
+            (\gf1 -> mother p >>=   -- gf1 is only used in the final return
+                (\mom -> father mom >>=
+                    (\gf2 -> return (gf1,gf2) ))))
+#+END_SRC
+
+#+NAME: grandparents shortest
+#+BEGIN_SRC haskell 
+bothGrandfathers p = do
+    dad <- father p
+    mom <- mother p
+    gf1 <- father dad
+    gf2 <- father mom
+    return (gf1, gf2)
+#+END_SRC
+
+
+Det dette her vil si at
+
+
+
+
+** Monad Forbannelsen
+Et annet sitat fra Doug Crockford er "In additional to it being useful, it is also cursed and the curse of the monad is that once you get the epiphany, once you understand -
+"Oh that's what it is" - you lose the ability to explain it to anybody." Denne forbannelsen er ganske kjent i Haskell miljøet men jeg mener at det er noe tull. 
+Jeg har virkelig troen på at monader er ganske intuitivt og at dere kan lære de hvis dere ønsker. 
