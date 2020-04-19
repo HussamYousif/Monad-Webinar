@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-19 Sun 17:23 -->
+<!-- 2020-04-19 Sun 21:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -246,25 +246,28 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgda1c765">1. This is the Monads power.</a>
+<li><a href="#org524281d">1. This is the Monads power.</a>
 <ul>
-<li><a href="#orgf1ce4a9">1.1. Introduksjon</a></li>
-<li><a href="#org8d9ff84">1.2. Presenter Meg selv</a></li>
-<li><a href="#orgbbc8076">1.3. Før vi går videre&#x2026;</a></li>
-<li><a href="#org40e24b8">1.4. Hvorfor skal du bry deg?</a></li>
-<li><a href="#org10546c8">1.5. Historie</a></li>
-<li><a href="#org8e1b562">1.6. Monad Forbannelsen</a></li>
+<li><a href="#org5bd442a">1.1. Introduksjon</a></li>
+<li><a href="#orgcaaa4a0">1.2. Presenter Meg selv</a></li>
+<li><a href="#orge99fee3">1.3. Før vi går videre&#x2026;</a></li>
+<li><a href="#org70bcce2">1.4. Hvorfor skal du bry deg?</a></li>
+<li><a href="#orgeec4c93">1.5. Historie</a></li>
+<li><a href="#orgfbb0a62">1.6. Funksjonell intro: Kontekst</a></li>
+<li><a href="#org11058c3">1.7. Kontekst!</a></li>
+<li><a href="#org7f31478">1.8. Feilhåndtering med Maybe monaden.</a></li>
+<li><a href="#orge3ee122">1.9. Monad Forbannelsen</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgda1c765" class="outline-2">
-<h2 id="orgda1c765"><span class="section-number-2">1</span> This is the Monads power.</h2>
+<div id="outline-container-org524281d" class="outline-2">
+<h2 id="org524281d"><span class="section-number-2">1</span> This is the Monads power.</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgf1ce4a9" class="outline-3">
-<h3 id="orgf1ce4a9"><span class="section-number-3">1.1</span> Introduksjon</h3>
+<div id="outline-container-org5bd442a" class="outline-3">
+<h3 id="org5bd442a"><span class="section-number-3">1.1</span> Introduksjon</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Heisann, takk for at dere ville høre mer om Monader! Idag skal jeg snakke om Monader og hvordan de kan påvirke din utvikling selv om du utvikler i et imperativt språk. 
@@ -273,8 +276,8 @@ Heisann, takk for at dere ville høre mer om Monader! Idag skal jeg snakke om Mo
 </div>
 
 
-<div id="outline-container-org8d9ff84" class="outline-3">
-<h3 id="org8d9ff84"><span class="section-number-3">1.2</span> Presenter Meg selv</h3>
+<div id="outline-container-orgcaaa4a0" class="outline-3">
+<h3 id="orgcaaa4a0"><span class="section-number-3">1.2</span> Presenter Meg selv</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Jeg heter Hussam og er en utvikler hos Knowit experience Bergen. Jeg er også veldig glad i Haskell og funksjonell programmering.
@@ -283,8 +286,8 @@ Jeg ble spurt om jeg ville holde et webinar om Haskell men tenkte at det var bed
 </div>
 </div>
 
-<div id="outline-container-orgbbc8076" class="outline-3">
-<h3 id="orgbbc8076"><span class="section-number-3">1.3</span> Før vi går videre&#x2026;</h3>
+<div id="outline-container-orge99fee3" class="outline-3">
+<h3 id="orge99fee3"><span class="section-number-3">1.3</span> Før vi går videre&#x2026;</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 douglas Crockford sa "In order to understand monads, you need to first learn Haskell and Category theory. 
@@ -301,8 +304,8 @@ side så vil jeg oppmuntre alle som er interessert i Haskell. Lær haskell!
 
 
 
-<div id="outline-container-org40e24b8" class="outline-3">
-<h3 id="org40e24b8"><span class="section-number-3">1.4</span> Hvorfor skal du bry deg?</h3>
+<div id="outline-container-org70bcce2" class="outline-3">
+<h3 id="org70bcce2"><span class="section-number-3">1.4</span> Hvorfor skal du bry deg?</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Funksjonelle konsepter kommer til imperative språk følgende konsepter ble introdusert i funksjonelle språk men kom til imperative et par tiår seinere:
@@ -316,8 +319,8 @@ Men du får også lettere feil håndtering. Mindre null checks overalt og mindre
 </div>
 </div>
 
-<div id="outline-container-org10546c8" class="outline-3">
-<h3 id="org10546c8"><span class="section-number-3">1.5</span> Historie</h3>
+<div id="outline-container-orgeec4c93" class="outline-3">
+<h3 id="orgeec4c93"><span class="section-number-3">1.5</span> Historie</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Monader ble introdusert av den franske matematikeren Roger Godement. Monader holdt seg blant teoretikerne i flere tiår og begynte å bli mer populært blant informatikk forskere. 
@@ -328,29 +331,186 @@ Ble brukt til blant annet å forske på lambda calculus. På et punkt ble det in
 Nå er konseptet populært blant mange utviklere som jobber med imperative språk. I fossdem 2020 var det en talk om monader i python. Andre språk som der monader blir brukt
 er blant annet Python, Perl, Scheme, Scala, F# og Kotlin. 
 </p>
+</div>
+</div>
 
+
+<div id="outline-container-orgfbb0a62" class="outline-3">
+<h3 id="orgfbb0a62"><span class="section-number-3">1.6</span> Funksjonell intro: Kontekst</h3>
+<div class="outline-text-3" id="text-1-6">
 <p>
 Gitt tre funksjoner f g h og et argument x så skriver man følgende. 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell" id="orgfa337d0"><span style="color: #4f97d7;">(</span>f <span style="color: #bc6ec5;">(</span>g <span style="color: #2d9574;">(</span>h x<span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span> <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span>f <span style="color: #7590db;">.</span> g <span style="color: #7590db;">.</span> h<span style="color: #4f97d7;">)</span> x
+<pre class="src src-haskell" id="org3900f96"><span style="color: #4f97d7;">(</span>f <span style="color: #bc6ec5;">(</span>g <span style="color: #2d9574;">(</span>h x<span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span> <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span>f <span style="color: #7590db;">.</span> g <span style="color: #7590db;">.</span> h<span style="color: #4f97d7;">)</span> x
 </pre>
 </div>
 
-
+<p>
+dette er ekvivalent til følgende i imperative språk. 
+</p>
 
 <div class="org-src-container">
 <pre class="src src-python">f<span style="color: #4f97d7;">(</span>g<span style="color: #bc6ec5;">(</span>h<span style="color: #2d9574;">(</span>x<span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span> 
 </pre>
 </div>
+
+<p>
+og det er slik man bygger opp programmer. Man tar små funksjoner og kombinerer de til å lage et større program. For et program som teller alle pandaer fra en eller annen struktor:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org70a1c1e"><span style="color: #bc6ec5; font-weight: bold;">countPandas</span> pandas <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span>length <span style="color: #7590db;">.</span> toList<span style="color: #4f97d7;">)</span> pandas
+</pre>
+</div>
 </div>
 </div>
 
 
-<div id="outline-container-org8e1b562" class="outline-3">
-<h3 id="org8e1b562"><span class="section-number-3">1.6</span> Monad Forbannelsen</h3>
-<div class="outline-text-3" id="text-1-6">
+
+<div id="outline-container-org11058c3" class="outline-3">
+<h3 id="org11058c3"><span class="section-number-3">1.7</span> Kontekst!</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+la oss gå over til Haskell kompilatoren. Vi bruker Haskell for den har full støtte for monader uten noe bibloteker eller uten at vi må implementere noe selv. 
+Vi skal stort sett gå over feilhåndtering monader fordi de er de mest aktuelle monadene å se på hvis vi skal jobbe med imperative språk. 
+</p>
+
+<p>
+Den enkleste datatypen vi har å jobbe med er heltall: Integers. Vi kan plusse de sammen 
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org92da8fd"><span style="color: #bc6ec5; font-weight: bold;">plus1</span> <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span><span style="color: #7590db;">+</span><span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span>
+<span style="color: #bc6ec5; font-weight: bold;">plus1</span> <span style="color: #a45bad;">0</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">double</span> <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span><span style="color: #7590db;">*</span><span style="color: #a45bad;">2</span><span style="color: #4f97d7;">)</span> 
+<span style="color: #bc6ec5; font-weight: bold;">quadrouple</span> <span style="color: #7590db;">=</span> double <span style="color: #7590db;">.</span> double 
+
+<span style="color: #bc6ec5; font-weight: bold;">half</span> <span style="color: #7590db;">=</span> <span style="color: #4f97d7;">(</span><span style="color: #7590db;">/</span><span style="color: #a45bad;">2</span><span style="color: #4f97d7;">)</span>
+<span style="color: #bc6ec5; font-weight: bold;">quarter</span> <span style="color: #7590db;">=</span> half <span style="color: #7590db;">.</span> half
+</pre>
+</div>
+
+<p>
+Vi har mange operasjoner vi kan gjøre med tall, en operasjon som kan feile er nok å dele på null. 
+</p>
+
+<p>
+Det som er viktig her er å formidle at det med at deling med null er bare et eksempel på noe som kan feile. Å forsøke å lese en fil som ikkje eksisterer kan feile,
+å kalle en funksjon på en nullpointer kan feile, å gjøre en bad request kan feile osv. 
+</p>
+
+<p>
+Vi håndterer slikt med å kaste exceptions. Men exceptions kan gjøre det vanskelig å debugge og gi spaghetti kode. 
+</p>
+
+<p>
+Exeptions enkoder feilen i funksjonskallet, men istedet hva med å enkode feilen i typen? 
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7f31478" class="outline-3">
+<h3 id="org7f31478"><span class="section-number-3">1.8</span> Feilhåndtering med Maybe monaden.</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Maybe monaden er en super enkel monade som gir metodikk for utvikling av feilbare kalkulasjoner!
+</p>
+
+<p>
+Typesignaturen kan se en smule ut som None verdien i python eller null verdien i de fleste andre språk. Men bind og return gjør den annerledes. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org7721ebe"><span style="color: #4f97d7; font-weight: bold;">data</span> <span style="color: #ce537a; font-weight: bold;">Maybe</span> a <span style="color: #7590db;">=</span> <span style="color: #ce537a; font-weight: bold;">Just</span> a <span style="color: #7590db;">|</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+
+<span style="color: #4f97d7; font-weight: bold;">instance</span> <span style="color: #ce537a; font-weight: bold;">Monad</span> <span style="color: #ce537a; font-weight: bold;">Maybe</span> a <span style="color: #4f97d7; font-weight: bold;">where</span>
+  return <span style="color: #7590db;">=</span> <span style="color: #ce537a; font-weight: bold;">Just</span>
+  <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #7590db;">&gt;&gt;=</span> <span style="color: #4f97d7; font-weight: bold;">_</span> <span style="color: #7590db;">=</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+  <span style="color: #ce537a; font-weight: bold;">Just</span> a <span style="color: #7590db;">&gt;&gt;=</span> f <span style="color: #7590db;">=</span> f a
+</pre>
+</div>
+<p>
+Tegning av en boks. SE TEGNING
+</p>
+
+<p>
+Maybe er en boks som omringer verdien din hvis det finnes en verdi og gir ut nothing hvis det ikke finnes noe verdi. 
+</p>
+
+<p>
+Det som er viktig med Maybe er at den tar ansvaret for feilhåndtering vekk fra funksjonen som kalkulerer og legger ansvaret over på bind. 
+</p>
+
+
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="orgdc56b3f"><span style="color: #bc6ec5; font-weight: bold;">div</span> teller nevner <span style="color: #7590db;">=</span> <span style="color: #4f97d7; font-weight: bold;">if</span> nevnert<span style="color: #7590db;">==</span><span style="color: #a45bad;">0</span> <span style="color: #4f97d7; font-weight: bold;">then</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #4f97d7; font-weight: bold;">else</span> teller<span style="color: #7590db;">/</span>nevner
+
+<span style="color: #bc6ec5; font-weight: bold;">verdi</span> <span style="color: #7590db;">=</span> div <span style="color: #a45bad;">1</span> <span style="color: #a45bad;">2</span>
+
+verdi <span style="color: #bc6ec5; font-weight: bold;">&gt;&gt;=</span> <span style="color: #4f97d7;">(</span> <span style="color: #7590db;">+</span> <span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span> <span style="color: #7590db;">#</span> <span style="color: #ce537a; font-weight: bold;">Vil</span> ikke virker<span style="color: #7590db;">!!!</span>
+verdi <span style="color: #bc6ec5; font-weight: bold;">&gt;&gt;=</span> <span style="color: #4f97d7;">(</span>return <span style="color: #7590db;">.</span> <span style="color: #bc6ec5;">(</span><span style="color: #7590db;">+</span><span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span> <span style="color: #7590db;">#</span>  virker<span style="color: #7590db;">!!!</span>
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org2b685da"><span style="color: #bc6ec5; font-weight: bold;">bothGrandfathers</span> <span style="color: #7590db;">::</span> <span style="color: #ce537a; font-weight: bold;">Person</span> <span style="color: #7590db;">-&gt;</span> <span style="color: #ce537a; font-weight: bold;">Maybe</span> <span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">Person</span>, <span style="color: #ce537a; font-weight: bold;">Person</span><span style="color: #4f97d7;">)</span>
+    bothGrandfathers p <span style="color: #7590db;">=</span>
+        <span style="color: #4f97d7; font-weight: bold;">case</span> father p <span style="color: #4f97d7; font-weight: bold;">of</span>
+            <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #7590db;">-&gt;</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+            <span style="color: #ce537a; font-weight: bold;">Just</span> dad <span style="color: #7590db;">-&gt;</span>
+                <span style="color: #4f97d7; font-weight: bold;">case</span> father dad <span style="color: #4f97d7; font-weight: bold;">of</span>
+                    <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #7590db;">-&gt;</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+                    <span style="color: #ce537a; font-weight: bold;">Just</span> gf1 <span style="color: #7590db;">-&gt;</span>                          <span style="color: #2aa1ae; background-color: #292e34;">-- </span><span style="color: #2aa1ae; background-color: #292e34;">found first grandfather</span>
+                        <span style="color: #4f97d7; font-weight: bold;">case</span> mother p <span style="color: #4f97d7; font-weight: bold;">of</span>
+                            <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #7590db;">-&gt;</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+                            <span style="color: #ce537a; font-weight: bold;">Just</span> mom <span style="color: #7590db;">-&gt;</span>
+                                <span style="color: #4f97d7; font-weight: bold;">case</span> father mom <span style="color: #4f97d7; font-weight: bold;">of</span>
+                                    <span style="color: #ce537a; font-weight: bold;">Nothing</span> <span style="color: #7590db;">-&gt;</span> <span style="color: #ce537a; font-weight: bold;">Nothing</span>
+                                    <span style="color: #ce537a; font-weight: bold;">Just</span> gf2 <span style="color: #7590db;">-&gt;</span>          <span style="color: #2aa1ae; background-color: #292e34;">-- </span><span style="color: #2aa1ae; background-color: #292e34;">found second grandfather</span>
+                                        <span style="color: #ce537a; font-weight: bold;">Just</span> <span style="color: #4f97d7;">(</span>gf1, gf2<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org4401dcb"><span style="color: #bc6ec5; font-weight: bold;">bothGrandfathers</span> p <span style="color: #7590db;">=</span>
+    father p <span style="color: #7590db;">&gt;&gt;=</span>
+        <span style="color: #4f97d7;">(</span><span style="color: #7590db;">\</span>dad <span style="color: #7590db;">-&gt;</span> father dad <span style="color: #7590db;">&gt;&gt;=</span>
+            <span style="color: #bc6ec5;">(</span><span style="color: #7590db;">\</span>gf1 <span style="color: #7590db;">-&gt;</span> mother p <span style="color: #7590db;">&gt;&gt;=</span>   <span style="color: #2aa1ae; background-color: #292e34;">-- </span><span style="color: #2aa1ae; background-color: #292e34;">gf1 is only used in the final return</span>
+                <span style="color: #2d9574;">(</span><span style="color: #7590db;">\</span>mom <span style="color: #7590db;">-&gt;</span> father mom <span style="color: #7590db;">&gt;&gt;=</span>
+                    <span style="color: #67b11d;">(</span><span style="color: #7590db;">\</span>gf2 <span style="color: #7590db;">-&gt;</span> return <span style="color: #b1951d;">(</span>gf1,gf2<span style="color: #b1951d;">)</span> <span style="color: #67b11d;">)</span><span style="color: #2d9574;">)</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-haskell" id="org8f0207e"><span style="color: #bc6ec5; font-weight: bold;">bothGrandfathers</span> p <span style="color: #7590db;">=</span> <span style="color: #4f97d7; font-weight: bold;">do</span>
+    dad <span style="color: #7590db;">&lt;-</span> father p
+    mom <span style="color: #7590db;">&lt;-</span> mother p
+    gf1 <span style="color: #7590db;">&lt;-</span> father dad
+    gf2 <span style="color: #7590db;">&lt;-</span> father mom
+    return <span style="color: #4f97d7;">(</span>gf1, gf2<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+
+<p>
+Det dette her vil si at
+</p>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orge3ee122" class="outline-3">
+<h3 id="orge3ee122"><span class="section-number-3">1.9</span> Monad Forbannelsen</h3>
+<div class="outline-text-3" id="text-1-9">
 <p>
 Et annet sitat fra Doug Crockford er "In additional to it being useful, it is also cursed and the curse of the monad is that once you get the epiphany, once you understand -
 "Oh that's what it is" - you lose the ability to explain it to anybody." Denne forbannelsen er ganske kjent i Haskell miljøet men jeg mener at det er noe tull. 
@@ -362,7 +522,7 @@ Jeg har virkelig troen på at monader er ganske intuitivt og at dere kan lære d
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Hussam Yousif</p>
-<p class="date">Created: 2020-04-19 Sun 17:23</p>
+<p class="date">Created: 2020-04-19 Sun 21:52</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
